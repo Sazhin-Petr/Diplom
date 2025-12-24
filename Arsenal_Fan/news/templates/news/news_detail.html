@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'main/base.html' %}
 
-</body>
-</html>
+{% block content %}
+<div class="wrap">
+    <h1>{{ news.title }}</h1>
+    <p>📅 {{ news.date_created|date:"d.m.Y H:i" }}</p>
+
+    {% if news.image %}
+    <img src="{{ news.image.url }}" alt="{{ news.title }}" style="max-width: 100%;">
+    {% endif %}
+
+    <div style="margin: 30px 0; font-size: 18px; line-height: 1.6;">
+        {{ news.content|linebreaks }}
+    </div>
+
+    <h3>Комментарии ({{ comments.count }})</h3>
+
+    {% if user.is_authenticated %}
+    <form method="post" action="{% url 'add_comment' news.pk %}">
+        {% csrf_token %}
+        <textarea name="text" placeholder="Ваш комментарий..." rows="3" style="width: 100%; padding: 10px;"></textarea>
+        <button type="submit" style="background: #EF0107; color: white; padding: 10px 20px; border: none; margin-top: 10px;">
+            Отправить
+        </button>
+    </form>
+    {% else %}
+    <p>Чтобы оставить комментарий, <a href="{% url 'login' %}">войдите</a> или <a href="{% url 'signup' %}">зарегистрируйтесь</a>.</p>
+    {% endif %}
+
+    <div style="margin-top: 30px;">
+        {% for comment in comments %}
+        <div style="border-bottom: 1px solid #ddd; padding: 15px 0;">
+            <strong>{{ comment.author.username }}</strong>
+            <small style="color: #666;">{{ comment.created_at|date:"d.m.Y H:i" }}</small>
+            <p>{{ comment.text|linebreaks }}</p>
+        </div>
+        {% empty %}
+        <p>Пока нет комментариев. Будьте первым!</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

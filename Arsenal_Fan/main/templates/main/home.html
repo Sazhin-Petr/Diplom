@@ -1,5 +1,100 @@
 {% extends 'main/base.html' %}
 {% load static %}
+
 {% block content %}
-<p class="head"><h1>Добро пожаловать на фан-сайт Арсенала!</h1></p>
+
+<section class="hero">
+    <div class="wrap">
+        <div class="hero-content">
+            <h1 class="arsenal-title">Arsenal FC</h1>
+            <p class="arsenal-motto">"TRUST THE PROCESS"</p>
+
+            {% if next_match %}
+            <div class="next-match">
+                <h3 class="match-title">Ближайший матч:</h3>
+                <div class="match-info">
+                    <div class="teams">
+                        <span class="team arsenal">Arsenal</span>
+                        <span class="vs">vs</span>
+                        <span class="team opponent">{{ next_match.opponent }}</span>
+                    </div>
+                    <div class="match-details">
+                        <span class="date">{{ next_match.date }} | {{ next_match.time }}</span>
+                        <span class="competition">{{ next_match.competition }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="news-section">
+    <div class="wrap">
+        <h2 class="section-title-arsenal">Последние новости</h2>
+
+        {% if news %}
+        <div class="news-grid home-news-grid">
+            {% for item in news %}
+            <article class="news-card">
+                {% if item.image %}
+                <div class="news-image">
+                    <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                </div>
+                {% else %}
+                <div class="news-image placeholder">
+                    <div class="placeholder-text">Arsenal</div>
+                </div>
+                {% endif %}
+
+                <div class="news-content">
+                    <div class="news-meta">
+                        <span class="news-date">{{ item.date_created|date:"d.m.Y" }}</span>
+                    </div>
+
+                    <h3 class="news-title">
+                        <a href="{% url 'news_detail' item.pk %}">{{ item.title }}</a>
+                    </h3>
+
+                    <p class="news-excerpt">
+                        {{ item.content|truncatewords:30 }}
+                    </p>
+
+                    <div class="news-footer">
+                        <a href="{% url 'news_detail' item.pk %}" class="read-more">
+                            Читать полностью
+                        </a>
+                        <span class="comment-count">
+                            💬 {{ item.comments.count }}
+                        </span>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        {% if news.has_other_pages %}
+        <div class="pagination">
+            <div class="pagination-info">
+                Страница {{ news.number }} из {{ news.paginator.num_pages }}
+            </div>
+
+            <div class="pagination-links">
+                {% if news.has_previous %}
+                    <a href="?page=1" class="page-link">« Первая</a>
+                    <a href="?page={{ news.previous_page_number }}" class="page-link">‹ Назад</a>
+                {% endif %}
+
+                <span class="current-page">{{ news.number }}</span>
+
+                {% if news.has_next %}
+                    <a href="?page={{ news.next_page_number }}" class="page-link">Вперед ›</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% endif %}
+    </div>
+</section>
 {% endblock %}

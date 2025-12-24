@@ -1,10 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'main/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+<div class="wrap">
+    <div class="page-header">
+        <h1>Все новости Арсенала</h1>
+        <p class="page-subtitle">Полный архив новостей футбольного клуба</p>
+    </div>
+
+    <div class="news-filters">
+        <div class="filter-info">
+            Всего новостей: {{ news.paginator.count }}
+        </div>
+    </div>
+
+    {% if news %}
+    <div class="news-grid">
+        {% for item in news %}
+        <article class="news-card">
+            {% if item.image %}
+            <div class="news-image">
+                <img src="{{ item.image.url }}" alt="{{ item.title }}">
+            </div>
+            {% else %}
+            <div class="news-image placeholder">
+                <div class="placeholder-text">Arsenal</div>
+            </div>
+            {% endif %}
+
+            <div class="news-content">
+                <div class="news-meta">
+                    <span class="news-date">{{ item.date_created|date:"d.m.Y H:i" }}</span>
+                    {% if not item.is_published %}
+                    <span class="news-status draft">Черновик</span>
+                    {% endif %}
+                </div>
+
+                <h2 class="news-title">
+                    <a href="{% url 'news_detail' item.pk %}">{{ item.title }}</a>
+                </h2>
+
+                <p class="news-excerpt">
+                    {{ item.content|truncatewords:50 }}
+                </p>
+
+                <div class="news-footer">
+                    <a href="{% url 'news_detail' item.pk %}" class="read-more">
+                        Читать полностью →
+                    </a>
+                    <div class="news-stats">
+                        <span class="comment-count">
+                            💬 {{ item.comments.count }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+    {% if news.has_other_pages %}
+    <div class="pagination">
+        <div class="pagination-info">
+            Показано {{ news.start_index }}–{{ news.end_index }} из {{ news.paginator.count }} новостей
+            (Страница {{ news.number }} из {{ news.paginator.num_pages }})
+        </div>
+
+        <div class="pagination-links">
+            {% if news.has_previous %}
+                <a href="?page=1" class="page-link">« Первая</a>
+                <a href="?page={{ news.previous_page_number }}" class="page-link">‹ Назад</a>
+            {% endif %}
+
+            {% for num in news.paginator.page_range %}
+                {% if num == news.number %}
+                    <span class="page-link current">{{ num }}</span>
+                {% elif num > news.number|add:'-3' and num < news.number|add:'3' %}
+                    <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if news.has_next %}
+                <a href="?page={{ news.next_page_number }}" class="page-link">Вперед ›</a>
+                <a href="?page={{ news.paginator.num_pages }}" class="page-link">Последняя »</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="no-news">
+        <div class="no-news-icon">📰</div>
+        <h3>Новостей пока нет</h3>
+        <p>Следите за обновлениями, скоро появятся свежие новости о клубе!</p>
+        <a href="{% url 'home' %}" class="btn-back">Вернуться на главную</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

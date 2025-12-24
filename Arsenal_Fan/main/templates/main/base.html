@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Arsenal</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
 </head>
 <body>
 <div class="menu">
@@ -13,6 +13,7 @@
         <div class="logo"><a href="{% url 'home' %}"><img src="{% static 'images/Logo.png' %}" alt="Arsenal"></a></div>
         <ul>
             <li><a href="{% url 'home' %}">Главная</a></li>
+            <li><a href="/news/">Все новости</a></li>
             <li><a href="#">История клуба</a></li>
             <li><a href="#">Состав команды</a></li>
             <li><a href="#">Матчи</a></li>
@@ -21,10 +22,10 @@
     </div>
 </div>
 <div class="content">
-  <div class="wrap">
-    {% block content %}
-    {% endblock %}
-  </div>
+    <div class="wrap">
+        {% block content %}
+        {% endblock %}
+    </div>
 </div>
 </body>
 </html>
