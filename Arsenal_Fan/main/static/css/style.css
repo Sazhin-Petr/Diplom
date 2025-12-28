@@ -13,7 +13,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #fff3cd;
     line-height: 1.6;
 }
 
@@ -487,5 +487,423 @@ body {
         flex-direction: column;
         gap: 10px;
         align-items: center;
+    }
+}
+
+/*   ВНУТРЕННЕЕ МЕНЮ ИСТОРИИ */
+
+.history-submenu {
+    background: linear-gradient(to right, #EF0107, #9C824A);
+    padding: 15px 0;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.history-nav {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.history-nav li {
+    margin: 0;
+}
+
+.history-nav a {
+    color: var(--arsenal-dark);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.history-nav a:hover {
+    color: var(--arsenal-gold);
+}
+
+/*   СТИЛИ ДЛЯ РАЗНЫХ СТРАНИЦ */
+
+.history-page {
+    padding: 20px 0;
+}
+
+.history-page .arsenal-title {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #EF0107;
+}
+
+.history-subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+/* Стили для таймлайна вех */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 40px auto;
+    padding-left: 40px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #EF0107, #9C824A);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+    padding-left: 40px;
+}
+
+.timeline-year {
+    position: absolute;
+    left: -15px;
+    top: 0;
+    background: #EF0107;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    min-width: 80px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(239, 1, 7, 0.3);
+    z-index: 2;
+}
+
+.timeline-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border-left: 5px solid #9C824A;
+}
+
+.timeline-content h3 {
+    color: #EF0107;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.milestone-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 15px 0;
+    border: 3px solid #9C824A;
+}
+
+/* Сетка легенд */
+.legends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.legend-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    border-top: 5px solid #EF0107;
+    position: relative;
+    overflow: hidden;
+}
+
+.legend-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(239, 1, 7, 0.15);
+}
+
+.legend-card img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 20px;
+    border: 5px solid #9C824A;
+}
+
+.legend-card h3 {
+    color: #333;
+    margin: 10px 0;
+    font-size: 1.4rem;
+}
+
+.legend-position {
+    color: #EF0107;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 5px 0;
+}
+
+.legend-years {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    padding: 8px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+.btn-more {
+    display: inline-block;
+    background: linear-gradient(to right, #EF0107, #9C824A);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-more:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(239, 1, 7, 0.3);
+}
+
+/* Стили для трофеев */
+.trophies-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.trophy-item {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    border: 3px solid #9C824A;
+    transition: transform 0.3s ease;
+}
+
+.trophy-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(156, 130, 74, 0.2);
+}
+
+.trophy-header {
+    margin-bottom: 20px;
+}
+
+.trophy-header h3 {
+    color: #EF0107;
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+}
+
+.trophy-competition {
+    display: inline-block;
+    background: #f0f0f0;
+    color: #666;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
+.trophy-count {
+    font-size: 3.5rem;
+    color: #EF0107;
+    font-weight: bold;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.trophy-years {
+    color: #333;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.trophy-years strong {
+    color: #EF0107;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.trophy-image {
+    max-width: 100%;
+    height: 150px;
+    object-fit: contain;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+/* Стили для детальной страницы легенды */
+.legend-detail-page {
+    padding: 20px 0;
+}
+
+.back-nav {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.back-btn {
+    display: inline-block;
+    background: #f0f0f0;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid #ddd;
+}
+
+.back-btn:hover {
+    background: #EF0107;
+    color: white;
+    border-color: #EF0107;
+}
+
+.legend-detail {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+}
+
+.legend-header {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.legend-photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 8px solid #9C824A;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.legend-info h1 {
+    color: #EF0107;
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+}
+
+.legend-position {
+    font-size: 1.3rem;
+    color: #666;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.legend-years {
+    font-size: 1.1rem;
+    color: #333;
+    background: #f9f9f9;
+    padding: 10px 20px;
+    border-radius: 25px;
+    display: inline-block;
+}
+
+.legend-content {
+    margin-top: 40px;
+}
+
+.legend-section {
+    margin-bottom: 40px;
+}
+
+.legend-section h2 {
+    color: #EF0107;
+    border-bottom: 3px solid #9C824A;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.legend-section p {
+    line-height: 1.8;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+/* Состояние пустоты */
+.no-data, .no-data-card {
+    text-align: center;
+    padding: 60px;
+    background: #f9f9f9;
+    border-radius: 15px;
+    color: #666;
+    font-size: 1.2rem;
+    font-style: italic;
+    border: 3px dashed #ddd;
+    margin: 40px auto;
+    max-width: 600px;
+}
+
+.no-data-card {
+    grid-column: 1 / -1;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .history-nav {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .history-nav a {
+        width: 90%;
+        text-align: center;
+    }
+
+    .timeline {
+        padding-left: 20px;
+    }
+
+    .timeline::before {
+        left: 10px;
+    }
+
+    .legend-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .legend-photo {
+        width: 200px;
+        height: 200px;
+    }
+
+    .back-nav {
+        flex-direction: column;
     }
 }

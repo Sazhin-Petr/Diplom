@@ -1,0 +1,23 @@
+{% extends 'history/base_history.html' %}
+{% load static %}
+
+{% block content %}
+<div class="history-page">
+    <h1 class="arsenal-title">Легенды Арсенала</h1>
+    <p class="history-subtitle">Игроки, которые навсегда вписали свои имена в историю клуба</p>
+    
+    <div class="legends-grid">
+        {% for legend in legends %}
+        <div class="legend-card">
+            {% if legend.image %}
+            <img src="{{ legend.image.url }}" alt="{{ legend.name }}">
+            {% endif %}
+            <h3>{{ legend.name }}</h3>
+            <p class="legend-position">{{ legend.get_position_display }}</p>
+            <p class="legend-years">{{ legend.years_at_club }}</p>
+            <a href="{% url 'history:legend_detail' legend.pk %}" class="btn-more">Подробнее</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

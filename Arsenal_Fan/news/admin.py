@@ -2,7 +2,6 @@ from django.contrib import admin
 from .models import News, Comment
 
 
-@admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ['title', 'date_created', 'is_published', 'comments_count']
     list_filter = ['date_created', 'is_published']
@@ -24,7 +23,6 @@ class NewsAdmin(admin.ModelAdmin):
     comments_count.short_description = 'Комментарии'
 
 
-@admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['author', 'news', 'created_at', 'text_preview']
     list_filter = ['created_at', 'news']
@@ -35,3 +33,7 @@ class CommentAdmin(admin.ModelAdmin):
         return obj.text[:50] + '...' if len(obj.text) > 50 else obj.text
 
     text_preview.short_description = 'Текст (превью)'
+
+
+admin.site.register(News, NewsAdmin)
+admin.site.register(Comment, CommentAdmin)

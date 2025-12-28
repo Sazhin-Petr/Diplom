@@ -1,0 +1,36 @@
+{% extends 'history/base_history.html' %}
+{% load static %}
+
+{% block content %}
+<div class="legend-detail-page">
+    <div class="back-nav">
+        <a href="{% url 'history:legends' %}" class="back-btn">Назад к легендам</a>
+        <a href="{% url 'history:history_home' %}" class="back-btn">К истории клуба</a>
+    </div>
+
+    <div class="legend-detail">
+        <div class="legend-header">
+            {% if legend.image %}
+            <img src="{{ legend.image.url }}" alt="{{ legend.name }}" class="legend-photo">
+            {% endif %}
+            <div class="legend-info">
+                <h1>{{ legend.name }}</h1>
+                <p class="legend-position">{{ legend.get_position_display }}</p>
+                <p class="legend-years">Годы в клубе: {{ legend.years_at_club }}</p>
+            </div>
+        </div>
+
+        <div class="legend-content">
+            <div class="legend-section">
+                <h2>Описание</h2>
+                <p>{{ legend.description|linebreaks }}</p>
+            </div>
+
+            <div class="legend-section">
+                <h2>Достижения</h2>
+                <p>{{ legend.achievements|linebreaks }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

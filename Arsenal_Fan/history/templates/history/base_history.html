@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>История клуба - Arsenal</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+</head>
+<body>
+
+<!-- Внутренняя навигация раздела "История" -->
+<div class="history-submenu">
+    <div class="wrap">
+        <ul class="history-nav">
+            <li><a href="{% url 'home' %}">На главную</a></li>
+            <li><a href="{% url 'history:milestones' %}"
+                   class="{% if active_page == 'milestones' %}active{% endif %}">
+                Исторические вехи
+            </a></li>
+            <li><a href="{% url 'history:legends' %}"
+                   class="{% if active_page == 'legends' %}active{% endif %}">
+                Легенды клуба
+            </a></li>
+            <li><a href="{% url 'history:trophies' %}"
+                   class="{% if active_page == 'trophies' %}active{% endif %}">
+                Трофеи
+            </a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="content">
+    <div class="wrap">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% extends 'history/base_history.html' %}
+{% load static %}
+
+{% block content %}
+<div class="history-page">
+    <h1 class="arsenal-title">Трофеи Арсенала</h1>
+    <p class="history-subtitle">Достижения и награды на протяжении всей истории клуба</p>
+    
+    <div class="trophies-container">
+        {% for trophy in trophies %}
+        <div class="trophy-item">
+            <div class="trophy-header">
+                <h3>{{ trophy.name }}</h3>
+                <span class="trophy-competition">{{ trophy.get_competition_display }}</span>
+            </div>
+            <div class="trophy-count">{{ trophy.count }} раз</div>
+            <div class="trophy-years">
+                <strong>Годы побед:</strong>
+                <p>{{ trophy.years }}</p>
+            </div>
+            {% if trophy.image %}
+            <img src="{{ trophy.image.url }}" alt="{{ trophy.name }}" class="trophy-image">
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
